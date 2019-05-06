@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="OData.OppMngmt">
+			<EntityType Name="Customer">
+				<Key><PropertyRef Name="id"/></Key><Property Name="id" Type="Edm.Int32"/><Property Name="custID" Type="Edm.String"/><Property Name="name" Type="Edm.String"/></EntityType>
+			<EntityContainer Name="Container"><EntitySet Name="Customers" EntityType="OData.OppMngmt.Customer"/></EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

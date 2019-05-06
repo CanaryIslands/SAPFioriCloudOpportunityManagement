@@ -1,0 +1,147 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="OpportunityManagement.controller.NewOpportunity" xmlns:fb="sap.ui.comp.filterbar">
+	<App>
+		<pages>
+			<Page title="Gestione Opportunità {name}">
+				<content>
+					<IconTabBar selectedKey="__xmlview0--opportunityInfo" id="bar0">
+						<items>
+							<IconTabFilter text="{i18n>customer}" id="customerInfo" icon="sap-icon://customer">
+								<content>
+									<Label text="{custID}" width="100%" id="labelCustID"/><Text text="{name}" id="text0"/>
+									<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
+										<sap.ui.layout.form:formContainers>
+											<sap.ui.layout.form:FormContainer title="{i18n>newOpportunity}" id="container0">
+												<sap.ui.layout.form:formElements>
+													<sap.ui.layout.form:FormElement label="Valore Oportunità" id="element0">
+														<sap.ui.layout.form:fields>
+															<Input width="100%" id="input0"/>
+														</sap.ui.layout.form:fields>
+													</sap.ui.layout.form:FormElement>
+													<sap.ui.layout.form:FormElement label="Tipo Oportunità" id="element1">
+														<ComboBox id="box0" items="{/Opportunities}">
+															<items>
+																<core:Item text="{oppText}" key="{id}"/>
+															</items>
+														</ComboBox>
+													</sap.ui.layout.form:FormElement>
+													<sap.ui.layout.form:FormElement>
+														<Button xmlns="sap.m" text="Salva" press="createNewOpportunity" width="100px" id="button1" icon="sap-icon://save" type="Accept"/>
+													</sap.ui.layout.form:FormElement>
+												</sap.ui.layout.form:formElements>
+											</sap.ui.layout.form:FormContainer>
+										</sap.ui.layout.form:formContainers>
+										<sap.ui.layout.form:layout>
+											<sap.ui.layout.form:ResponsiveGridLayout id="layout0"/>
+										</sap.ui.layout.form:layout>
+									</sap.ui.layout.form:Form>
+								</content>
+							</IconTabFilter>
+							<IconTabFilter text="{i18n>opportunityInfo}" icon="sap-icon://task" id="opportunityInfo">
+								<content>
+									<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form1">
+										<sap.ui.layout.form:formContainers>
+											<sap.ui.layout.form:FormContainer title="Modifica opportunità nr. " id="container1" visible="false">
+												<sap.ui.layout.form:formElements>
+													<sap.ui.layout.form:FormElement label="Valore Stimato" id="element2">
+														<sap.ui.layout.form:fields>
+															<Input width="100%" id="input1"/>
+														</sap.ui.layout.form:fields>
+													</sap.ui.layout.form:FormElement>
+													<sap.ui.layout.form:FormElement label="Tipo Oportunità" id="element3">
+														<ComboBox id="oppStatus">
+															<items>
+																<core:ListItem text="OPEN" key="1"/>
+																<core:ListItem text="WIN" key="2"/>
+																<core:ListItem text="LOST" key="3"/>
+															</items>
+														</ComboBox>
+													</sap.ui.layout.form:FormElement>
+													<sap.ui.layout.form:FormElement>
+														<sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout3">
+															<sap.ui.layout:content>
+																<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml"
+																	xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" id="acceptModify" icon="sap-icon://accept" type="Accept" press="acceptModify"/>
+																<Label text=" -- " width="100%" id="label5_1536746136233"/>
+																<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+																	xmlns:sap.ui.layout.form="sap.ui.layout.form" id="rejectModify" icon="sap-icon://decline" type="Reject" press="rejectModify"/>
+															</sap.ui.layout:content>
+														</sap.ui.layout:HorizontalLayout>
+													</sap.ui.layout.form:FormElement>
+												</sap.ui.layout.form:formElements>
+											</sap.ui.layout.form:FormContainer>
+										</sap.ui.layout.form:formContainers>
+										<sap.ui.layout.form:layout>
+											<sap.ui.layout.form:ResponsiveGridLayout id="layout1"/>
+										</sap.ui.layout.form:layout>
+									</sap.ui.layout.form:Form>
+									<fb:FilterBar id="filterBar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+										<fb:filterGroupItems>
+											<fb:FilterGroupItem groupName="G1" name="A" label="Stato">
+												<fb:control>
+													<MultiComboBox id="slStatus" selectionFinish="onSlStatusSelectChange">
+														<core:Item key="1" text="OPEN"/>
+														<core:Item key="2" text="WIN"/>
+														<core:Item key="3" text="LOST"/>
+													</MultiComboBox>
+												</fb:control>
+											</fb:FilterGroupItem>
+										</fb:filterGroupItems>
+									</fb:FilterBar>
+									<PullToRefresh id="refresh0" customIcon="sap-icon://refresh"/>
+									<Table noDataText="No data" id="OppList" mode="SingleSelectMaster" selectionChange="onSelectionChange">
+										<items>
+											<ColumnListItem type="Active" id="OppListItem">
+												<cells/>
+											</ColumnListItem>
+										</items>
+										<columns>
+											<Column id="column0">
+												<header>
+													<Label text="Opp ID" id="label1"/>
+												</header>
+											</Column>
+											<Column id="column1">
+												<header>
+													<Label text="Cliente" id="label2"/>
+												</header>
+											</Column>
+											<Column id="column2">
+												<header>
+													<Label text="Tipo Opp" id="label3"/>
+												</header>
+											</Column>
+											<Column id="column3">
+												<header>
+													<Label text="Data" id="label4"/>
+												</header>
+											</Column>
+											<Column id="column4">
+												<header>
+													<Label text="Stato" id="label5"/>
+												</header>
+											</Column>
+											<Column id="column5">
+												<header>
+													<Label text="Valore Stimato" id="label6"/>
+												</header>
+											</Column>
+											<Column id="column6" visible="false">
+												<header>
+													<Text text="Codice Tipo Opportunità" id="text8"/>
+												</header>
+											</Column>
+										</columns>
+									</Table>
+								</content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+					<Label width="100%" id="selectedItemDate" visible="false"/>
+					<Label width="100%" id="selectedItemOppType" visible="false"/>
+					<Label width="100%" id="selectedItemOppID" visible="false"/>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
